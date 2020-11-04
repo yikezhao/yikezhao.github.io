@@ -1,0 +1,19 @@
+---
+title: "My awesome website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# This is Yike's awesome website 
+
+![](image/hug.JPG)
+
+Let's give everyone else a warm hug during this special winter.
+
+## Links to other websites
+
+Some websites you may find helpful!
+
+* [P8105](https://p8105.com)
