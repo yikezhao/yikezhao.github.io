@@ -1,0 +1,66 @@
+---
+title: "Problem 2"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+```
+
+# Loading data
+
+```{r}
+data("ny_noaa")
+
+ny_noaa =
+  ny_noaa %>% 
+  filter(id == "USC00300023") %>% 
+  separate(date, c("year", "month", "day")) %>% 
+  mutate(
+    tmax = as.integer(tmax),
+    tmin = as.integer(tmin)
+  )
+```
+
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Max& Min Temperature and Precipitation for Weather Station USC00300023
+
+```{r}
+ny_noaa %>% 
+  plot_ly(
+    x = ~tmin, y = ~tmax, color = ~prcp, alpha = .05, type = "scatter", mode = "markers"
+  ) 
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Max Temperature for Each Month
+
+```{r}
+ny_noaa %>% 
+  plot_ly(
+    x = ~month, y = ~tmax, color = ~month, type = "box", colors = "viridis"
+  )
+```
+
+### Number of Records for Each Month
+
+```{r}
+ny_noaa %>% 
+  count(month) %>% 
+  plot_ly(
+    x = ~month, y = ~n, color = ~month, type = "bar", colors = "viridis"
+  )
+```
